@@ -86,6 +86,19 @@ else
   echo -e "${GREEN}kubectl is already installed${NC}"
 fi
 
+# Install Neovim if needed
+if ! command -v nvim &> /dev/null; then
+  echo -e "${YELLOW}Neovim not found. Installing...${NC}"
+  if [ -f "$DOTFILES_DIR/bin/install-neovim.sh" ]; then
+    "$DOTFILES_DIR/bin/install-neovim.sh"
+  else
+    echo -e "${RED}Error: install-neovim.sh not found${NC}"
+    exit 1
+  fi
+else
+  echo -e "${GREEN}Neovim is already installed${NC}"
+fi
+
 # Function to create symlink with backup
 create_symlink() {
   local source="$1"
@@ -125,6 +138,9 @@ fi
 
 # Install starship.toml
 create_symlink "$DOTFILES_DIR/starship.toml" "$HOME/.config/starship.toml" "starship.toml"
+
+# Install Neovim configuration
+create_symlink "$DOTFILES_DIR/nvim/init.lua" "$HOME/.config/nvim/init.lua" "Neovim config"
 
 echo -e "${GREEN}Installation complete!${NC}"
 if [ "$SHELL_TYPE" = "zsh" ]; then

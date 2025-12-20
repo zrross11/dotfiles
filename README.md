@@ -59,8 +59,7 @@ Reload: `source ~/.zshrc`
 
 **Required:**
 - zsh (macOS) or bash (Linux)
+- Homebrew (macOS)
 - Starship (auto-installed by install script)
 - kubectl (auto-installed by install script)
-
-**Auto-installed if missing:**
-- Homebrew (macOS)
+- Neovim (auto-installed by install script)
