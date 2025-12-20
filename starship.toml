@@ -59,7 +59,6 @@ style = "bold red"
 format = '([\[$all_status$ahead_behind\]]($style) )'
 
 # Kubernetes configuration
-# This will show context and namespace when DOTFILES_SHOW_KUBE_CONTEXT=1
 [kubernetes]
 format = "on [⛵ $context \\($namespace\\)](bold cyan) "
 disabled = false
@@ -67,9 +66,6 @@ detect_extensions = ["yaml", "yml"]
 detect_files = ["kubeconfig"]
 detect_folders = [".kube"]
 detect_env_vars = ["KUBECONFIG"]
-
-# Kubernetes module visibility is controlled via DOTFILES_SHOW_KUBE_CONTEXT
-# Set DOTFILES_SHOW_KUBE_CONTEXT=0 to hide, 1 to show (default)
 
 # Command duration
 [cmd_duration]

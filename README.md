@@ -1,6 +1,6 @@
 # Dotfiles
 
-Personal dotfiles with Starship prompt and Kubernetes support. Works on macOS (zsh) and Linux (bash).
+Personal dotfiles with Starship prompt. Works on macOS (zsh) and Linux (bash).
 
 ## Quick Start
 
@@ -26,22 +26,6 @@ dotfiles/
 
 ## Configuration
 
-### Kubernetes Context Display
-
-Toggle Kubernetes context/namespace in the Starship prompt:
-
-**Option 1:** Edit `shell/zsh/config.zsh` (tracked in git)
-```bash
-export DOTFILES_SHOW_KUBE_CONTEXT=0  # 0 = hide, 1 = show (default)
-```
-
-**Option 2:** Add to `~/.local/bin/env` (not tracked, machine-specific)
-```bash
-export DOTFILES_SHOW_KUBE_CONTEXT=0
-```
-
-Reload: `source ~/.zshrc`
-
 ### Custom Settings
 
 - **Machine-specific config:** Add to `~/.local/bin/env` (auto-sourced)
@@ -50,9 +34,8 @@ Reload: `source ~/.zshrc`
 
 ## What's Included
 
-- Starship prompt with git, kubernetes, and more
+- Starship prompt with git, kubernetes, nvim installed
 - kubectl alias (`k`)
-- PATH management (krew, local bin)
 - Third-party integrations (Kiro, etc.)
 
 ## Requirements

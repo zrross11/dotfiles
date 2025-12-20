@@ -1,14 +1,6 @@
 # Starship prompt initialization
 
 if command -v starship &> /dev/null; then
-  # Configure kubernetes module visibility based on DOTFILES_SHOW_KUBE_CONTEXT
-  # This must be set before starship init
-  if [ "${DOTFILES_SHOW_KUBE_CONTEXT:-1}" = "0" ]; then
-    export STARSHIP_KUBERNETES_DISABLED=true
-  else
-    unset STARSHIP_KUBERNETES_DISABLED
-  fi
-
   # Set starship config location
   # DOTFILES_DIR should be set by the main shell config file
   if [ -n "$DOTFILES_DIR" ] && [ -f "$DOTFILES_DIR/starship.toml" ]; then
