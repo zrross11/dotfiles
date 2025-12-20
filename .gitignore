@@ -1,0 +1,19 @@
+# Sensitive files
+*.local
+.env
+*.secret
+
+# OS files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Backup files
+*.swp
+*.swo
+*~
+
+# Temporary files
+*.tmp
+*.log
+
