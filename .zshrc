@@ -21,7 +21,7 @@ fi
 export DOTFILES_DIR
 
 # Source configuration files
-for config_file in config.zsh path.zsh env.zsh kubectl.zsh integrations.zsh; do
+for config_file in config.zsh path.zsh env.zsh colors.zsh kubectl.zsh integrations.zsh; do
   if [ -f "$DOTFILES_DIR/shell/zsh/$config_file" ]; then
     source "$DOTFILES_DIR/shell/zsh/$config_file"
   fi
