@@ -20,6 +20,8 @@ dotfiles/
 ├── shell/                 # Shell-specific configs
 │   ├── zsh/              # zsh files (macOS)
 │   └── bash/             # bash files (Linux)
+├── nvim/                  # Neovim config
+├── kitty/                 # Kitty terminal config
 ├── bin/                   # Binary installation scripts
 └── install.sh            # Installation script
 ```
@@ -46,3 +48,11 @@ dotfiles/
 - Starship (auto-installed by install script)
 - kubectl (auto-installed by install script)
 - Neovim (auto-installed by install script)
+- Kitty terminal (manual install required)
+
+## Tech Stack
+
+This dotfiles repo is designed for the following tech stack:
+- **Terminal:** Kitty
+- **Editor:** Neovim
+- **Agentic Work:** OpenCode

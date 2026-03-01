@@ -60,6 +60,20 @@ if [[ "$OSTYPE" == "darwin"* ]] && ! command -v brew &> /dev/null; then
   fi
 fi
 
+# Install packages from Brewfile if it exists
+if [ -f "$DOTFILES_DIR/Brewfile" ]; then
+  echo -e "${BLUE}Installing packages from Brewfile...${NC}"
+  brew bundle install --file="$DOTFILES_DIR/Brewfile"
+else
+  # Install zsh-autosuggestions if no Brewfile
+  if [[ "$OSTYPE" == "darwin"* ]] && command -v brew &> /dev/null; then
+    if ! brew list zsh-autosuggestions &> /dev/null; then
+      echo -e "${YELLOW}Installing zsh-autosuggestions...${NC}"
+      brew install zsh-autosuggestions
+    fi
+  fi
+fi
+
 # Install Starship if needed (using dedicated script)
 if ! command -v starship &> /dev/null; then
   echo -e "${YELLOW}Starship not found. Installing...${NC}"
@@ -141,6 +155,9 @@ create_symlink "$DOTFILES_DIR/starship.toml" "$HOME/.config/starship.toml" "star
 
 # Install Neovim configuration
 create_symlink "$DOTFILES_DIR/nvim/init.lua" "$HOME/.config/nvim/init.lua" "Neovim config"
+
+# Install Kitty configuration
+create_symlink "$DOTFILES_DIR/kitty/kitty.conf" "$HOME/.config/kitty/kitty.conf" "Kitty config"
 
 echo -e "${GREEN}Installation complete!${NC}"
 if [ "$SHELL_TYPE" = "zsh" ]; then
