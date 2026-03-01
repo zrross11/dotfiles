@@ -1,7 +1,4 @@
-# Sensitive files
-*.local
-.env
-*.secret
+.zshrc
 
 # OS files
 .DS_Store
