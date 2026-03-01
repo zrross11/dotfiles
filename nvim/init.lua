@@ -1,5 +1,4 @@
 -- Neovim Configuration
--- Basic configuration for a clean, functional setup
 
 -- Install lazy.nvim plugin manager if not already installed
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -21,6 +20,21 @@ require("lazy").setup({
     config = function()
       require("catppuccin").setup({ flavour = "mocha" })
       vim.cmd.colorscheme "catppuccin"
+    end,
+  },
+  {
+    "nvim-tree/nvim-tree.lua",
+    dependencies = "nvim-tree/nvim-web-devicons",
+    config = function()
+      require("nvim-tree").setup({
+        view = {
+          side = "left",
+          width = 35,
+        },
+        renderer = {
+          indent_markers = { enable = true },
+        },
+      })
     end,
   },
 })
@@ -46,6 +60,9 @@ vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>w", ":w<CR>")
 vim.keymap.set("n", "<leader>q", ":q<CR>")
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
+
+-- File explorer
+vim.keymap.set("n", "\\", ":NvimTreeToggle<CR>")
 
 -- Window navigation
 vim.keymap.set("n", "<C-h>", "<C-w>h")

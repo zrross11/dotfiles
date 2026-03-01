@@ -15,6 +15,14 @@ NC='\033[0m' # No Color
 # Get the directory where this script is located
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+# Parse flags
+K8S=false
+for arg in "$@"; do
+  case "$arg" in
+    --k8s) K8S=true ;;
+  esac
+done
+
 echo -e "${GREEN}Installing dotfiles from $DOTFILES_DIR${NC}"
 
 # Detect shell from $SHELL environment variable (user's actual shell)
@@ -57,6 +65,20 @@ if [[ "$OSTYPE" == "darwin"* ]] && ! command -v brew &> /dev/null; then
     echo -e "${YELLOW}Please install Homebrew manually:${NC}"
     echo -e "${BLUE}  /bin/bash -c \"\$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\"${NC}"
     exit 1
+  fi
+fi
+
+# Install packages from Brewfile if it exists
+if [ -f "$DOTFILES_DIR/Brewfile" ]; then
+  echo -e "${BLUE}Installing packages from Brewfile...${NC}"
+  brew bundle install --file="$DOTFILES_DIR/Brewfile"
+else
+  # Install zsh-autosuggestions if no Brewfile
+  if [[ "$OSTYPE" == "darwin"* ]] && command -v brew &> /dev/null; then
+    if ! brew list zsh-autosuggestions &> /dev/null; then
+      echo -e "${YELLOW}Installing zsh-autosuggestions...${NC}"
+      brew install zsh-autosuggestions
+    fi
   fi
 fi
 
@@ -137,10 +159,18 @@ elif [ "$SHELL_TYPE" = "bash" ]; then
 fi
 
 # Install starship.toml
-create_symlink "$DOTFILES_DIR/starship.toml" "$HOME/.config/starship.toml" "starship.toml"
+if [ "$K8S" = true ]; then
+  echo -e "${BLUE}Enabling Kubernetes context in Starship prompt${NC}"
+  create_symlink "$DOTFILES_DIR/starship-k8s.toml" "$HOME/.config/starship.toml" "starship.toml (k8s)"
+else
+  create_symlink "$DOTFILES_DIR/starship.toml" "$HOME/.config/starship.toml" "starship.toml"
+fi
 
 # Install Neovim configuration
 create_symlink "$DOTFILES_DIR/nvim/init.lua" "$HOME/.config/nvim/init.lua" "Neovim config"
+
+# Install Kitty configuration
+create_symlink "$DOTFILES_DIR/kitty/kitty.conf" "$HOME/.config/kitty/kitty.conf" "Kitty config"
 
 echo -e "${GREEN}Installation complete!${NC}"
 if [ "$SHELL_TYPE" = "zsh" ]; then
