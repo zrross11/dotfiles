@@ -142,6 +142,9 @@ create_symlink "$DOTFILES_DIR/starship.toml" "$HOME/.config/starship.toml" "star
 # Install Neovim configuration
 create_symlink "$DOTFILES_DIR/nvim/init.lua" "$HOME/.config/nvim/init.lua" "Neovim config"
 
+# Install Kitty configuration
+create_symlink "$DOTFILES_DIR/kitty/kitty.conf" "$HOME/.config/kitty/kitty.conf" "Kitty config"
+
 echo -e "${GREEN}Installation complete!${NC}"
 if [ "$SHELL_TYPE" = "zsh" ]; then
   echo -e "${YELLOW}Note: You may need to restart your shell or run: source ~/.zshrc${NC}"

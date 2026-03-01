@@ -23,6 +23,21 @@ require("lazy").setup({
       vim.cmd.colorscheme "catppuccin"
     end,
   },
+  {
+    "nvim-tree/nvim-tree.lua",
+    dependencies = "nvim-tree/nvim-web-devicons",
+    config = function()
+      require("nvim-tree").setup({
+        view = {
+          side = "left",
+          width = 35,
+        },
+        renderer = {
+          indent_markers = { enable = true },
+        },
+      })
+    end,
+  },
 })
 
 -- Basic settings
@@ -41,6 +56,9 @@ vim.opt.updatetime = 250
 
 -- Set leader key
 vim.g.mapleader = " "
+
+-- File explorer
+vim.keymap.set("n", "\\", ":NvimTreeToggle<CR>")
 
 -- Basic keymaps
 vim.keymap.set("n", "<leader>w", ":w<CR>")
